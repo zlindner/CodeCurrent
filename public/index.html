@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Concur</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarSm">
         <span class="navbar-toggler-icon"></span>
@@ -24,23 +24,25 @@
         <div class="navbar-collapse collapse" id="collapsingNavbarSm">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#">Active</a>
+                    <a class="nav-link active" data-toggle="tab" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"data-toggle="tab"  href="#">Link</a>
+                    <a class="nav-link" data-toggle="tab" href="#">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#">Link</a>
+                    <a class="nav-link" data-toggle="tab" href="#">Sign Up</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <div class="code">
-
+    <div>
+        <div class="ribbon"></div>
+        <textarea class="editor" id="editor"></textarea>
     </div>
 
     <script src="/client.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </body>
 
 </html>
