@@ -2,11 +2,11 @@
   "name": "concur",
   "version": "1.0.0",
   "description": "An IDE built with teams in mind.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js"
   },
-  "author": "Zach Lindner",
+  "author": "Zachary Lindner",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
