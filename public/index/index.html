@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Concur</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An IDE built with teams in mind.">
+    <meta name="keywords" content="">
+    <meta name="author" content="Zachary Lindner">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+    <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+
+    <link rel="stylesheet" href="http://codemirror.net/theme/3024-day.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/3024-night.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/abcdef.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/ambiance-mobile.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/ambiance.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/base16-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/base16-light.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/bespin.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/blackboard.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/cobalt.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/colorforth.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/dracula.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/duotone-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/duotone-light.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/eclipse.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/elegant.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/erlang-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/hopscotch.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/icecoder.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/idea.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/isotope.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/lesser-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/liquibyte.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/lucario.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/material.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/mbo.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/mdn-like.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/midnight.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/monokai.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/neat.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/neo.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/night.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/oceanic-next.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/panda-syntax.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/paraiso-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/paraiso-light.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/pastel-on-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/railscasts.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/rubyblue.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/seti.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/shadowfox.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/solarized.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/ssms.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/the-matrix.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/tomorrow-night-bright.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/tomorrow-night-eighties.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/ttcn.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/twilight.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/vibrant-ink.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/xq-dark.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/xq-light.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/yeti.css">
+    <link rel="stylesheet" href="http://codemirror.net/theme/zenburn.css">
+</head>
+
+<body>
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Concur</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarSm">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="navbar-collapse collapse" id="collapsingNavbarSm">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../editor/editor.html">Editor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../login/login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../signup/signup.html">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div>
+        <div class="ribbon"></div>
+        <textarea class="editor" id="editor"></textarea>
+    </div>
+
+    <script src="/index/index.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://codemirror.net/lib/codemirror.js"></script>
+    <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+
+    <script src="http://codemirror.net/addon/edit/closebrackets.js"></script>
+</body>
+
+</html>

@@ -9,6 +9,7 @@
   "author": "Zachary Lindner",
   "license": "ISC",
   "dependencies": {
+    "codemirror": "^5.36.0",
     "express": "^4.16.3",
     "helmet": "^3.12.0",
     "socket.io": "^2.1.0"
