@@ -13,10 +13,6 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index/index.html');
 });
 
-app.get('/style.css', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public//styles/style.css'));
-});
-
 io.sockets.on('connection', function(socket) {
     socket.on('login', function(data) {
         console.log(data + ' connected');
