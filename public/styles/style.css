@@ -1,31 +1,107 @@
 body {
     font-family: "Helvetica", "Arial", sans-serif;
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
 }
 
+.toolbar {
+    width: 100%;
+    height: 35px;
+    background-color: #f8f9fa;
+}
+
+.left {
+    width: 250px;
+    height: 80%;
+    float: left;
+}
+
+.projName {
+    width: inherit;
+    height: 30px;
+    background-color: #dae0e5;
+    border-right: 1px solid #949596;
+}
+
+.projTree {
+    width: inherit;
+    height: 100%;
+    top: 95px;
+    bottom: 30px;
+    position: absolute;
+    background-color: #cbd3da;
+}
+
+.right {
+    width: auto;
+}
+
+.filebar {
+    height: 30px;
+    background-color: #dae0e5;
+}
+
+.filetab {
+    width: 100px;
+    height: 30px;
+    float: left;
+    border-bottom: 2px solid #0f87f8;
+}
+
+.closetab {
+    color: #4c4c4c;
+    margin-left: 80px;
+    position: absolute;
+}
+
+.closetab:hover {
+    color: #000000;
+}
+
+.filename {
+    color: #4c4c4c;
+    margin-left: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.footer {
+    width: 100%;
+    height: 30px;
+    position: fixed;
+    bottom: 0;
+    background-color: #f8f9fa;
+}
+
+/*
 .leftPanel {
     width: 20%;
+    height: 100%;
     float: left;
     resize: horizontal;
-    overflow: hidden;
-    padding-top: 40px;
-    z-index: 0;
+    background-color: #FF0000;
 }
 
 .rightPanel {
     width: auto;
-    z-index: 0;
     margin-left: auto;
-    padding-top: 40px;
+    margin-top: 40px;
 }
 
 .projectName {
     background-color: #FFFFFF;
     height: 30px;
+    display: block;
+    text-align: center;
 }
 
 .openFiles {
-    height: 30px;
-    border-bottom: 1px #9F9F9F solid;
+
 }
 
 .fileTree {
@@ -33,11 +109,14 @@ body {
     height: 800px;
 }
 
-.editorContainer {}
+.editorContainer {
+    width: auto;
+    height: 800px;
+}*/
 
 .navbar {
-    height: 40px;
-    z-index: 5;
+    height: 30px;
+    padding-top: 20px;
 }
 
 .nav-item {

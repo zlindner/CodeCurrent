@@ -17,19 +17,22 @@ $(document).ready(function() {
 });
 
 /*
- * Initialization
+ * Editor
  */
+
 let editor;
+let editorShown = false;
 
 function initEditor() {
     editor = CodeMirror.fromTextArea($('#editor')[0], {
-        mode: 'javascript',
         lineNumbers: true,
         indentUnit: 4,
         autoCloseBrackets: true,
     });
 
     editor.setSize(null, 800);
+
+    $(editor.getWrapperElement()).hide();
 }
 
 /*
@@ -37,6 +40,7 @@ function initEditor() {
  */
 
 let projectName;
+let projectLang;
 
 function setProjectName() {
     let name = $('#projectNameField').val();
@@ -57,15 +61,27 @@ function setProjectLang() {
     let lang = $('#projectLangSelect').val();
 
     if (lang != null) {
-        editor.setOption("mode", lang);
+        let mode = $("#projectLangSelect option:selected").attr('data-mime-type');
+        let script = $("#projectLangSelect option:selected").attr('data-script');
+        let s = document.createElement('script');
+
+        s.src = 'http://codemirror.net/mode/' + script + '/' + script + '.js';
+        s.async = true;
+
+        s.onload = function() {
+            editor.setOption("mode", mode);
+        }
+
+        document.head.appendChild(s);
         $('#projectLangErr').text('');
+        projectLang = lang;
 
         return true;
+    } else {
+        $('#projectLangErr').text('You must specify a language for the project');
+
+        return false;
     }
-
-    $('#projectLangErr').text('You must specify a language for the project');
-
-    return false;
 }
 
 function resetNewProject() {
@@ -80,8 +96,19 @@ function resetNewProject() {
 
 //TODO close button for open files
 //TODO probably modal for new file -> file name, language?
+//TODO get possible file types for language selected (like idea)
+//TODO set templates for file types
+//TODO support highliting for certain file types in a certain project type (ex. javascript project w/ special highlighting for json files, makefiles, etc.)
+
+let openFiles = 0;
 
 function newFile() {
     let html = '<li class="nav-item"><a class="nav-link active" href="#">untitled</a></li>';
     $('#fileTabs').append(html);
+
+    openFiles++;
+
+    if (!editorShown) {
+        $(editor.getWrapperElement()).show();
+    }
 }

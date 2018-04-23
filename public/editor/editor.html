@@ -17,45 +17,72 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
         <a class="navbar-brand" href="../index/index.html">
-            <img src="../assets/logo.png" width="50" height="50" alt="Concur">
+            <img src="../assets/logo.png" width="40" height="40" alt="Concur">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarSm">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-        <div class="navbar-collapse collapse" id="collapsingNavbarSm">
-            <ul class="nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#newProjectModal">New Project</a>
-                        <a class="dropdown-item" href="#" id="newFile">New File</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
+        <ul class="nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">File</a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Undo</a>
-                        <a class="dropdown-item" href="#">Redo</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#newProjectModal">New Project</a>
+                    <a class="dropdown-item" href="#" id="newFile">New File</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit</a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#"></a>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Undo</a>
+                    <a class="dropdown-item" href="#">Redo</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View</a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#"></a>
+                </div>
+            </li>
+        </ul>
     </nav>
 
-    <div class="leftPanel">
+    <div class="toolbar">
+
+    </div>
+
+    <div class="left">
+        <div class="projName">
+
+        </div>
+
+        <div class="projTree">
+
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="filebar">
+            <div class="filetab">
+                <span class="closetab">&times;</span>
+                <p class="filename">yolo.c</p>
+            </div>
+            <div class="filetab">
+                <span class="closetab">&times;</span>
+                <p class="filename noselect">poop.c</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+    <!--<div class="leftPanel">
         <div class="projectName">
-            <h4 id="projectNameHeader">Project Name</h4>
+            <p id="projectNameHeader"></p>
         </div>
 
         <div class="fileTree">
@@ -64,21 +91,13 @@
     </div>
 
     <div class="rightPanel">
-        <div class="openFiles">
-            <ul class="nav nav-tabs" id="fileTabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">yolo.c</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="nav nav-tabs" id="fileTabs"></ul>
+
 
         <div class="editorContainer">
-            <textarea class="editor" id="editor"></textarea>
+            <textarea id="editor"></textarea>
         </div>
-    </div>
+    </div> -->
 
     <div class="modal fade" id="newProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -97,7 +116,12 @@
                         <label for="projectLangSelect">Project language:</label><br>
                         <select id="projectLangSelect">
                             <option value="" disabled selected>---</option>
-                            <option value="c">C</option>
+                            <option value="c" data-mime-type="text/x-csrc" data-script="clike">C</option>
+                            <option value="c++" data-mime-type="text/x-c++src" data-script="clike">C++</option>
+                            <option value="csharp" data-mime-type="text/x-csharp" data-script="clike">C#</option>
+                            <option value="objectivec" data-mime-type="text/x-objectivec" data-script="clike">Objective-C</option>
+                            <option value="java" data-mime-type="text/x-java" data-script="clike">Java</option>
+                            <option value="javascript" data-mime-type="text/javascript" data-script="javascript">JavaScript</option>
                         </select>
                         <p id="projectLangErr" style="color:red"></p>
                     </form>
@@ -114,7 +138,6 @@
     <script src="/socket.io/socket.io.js"></script>
 
     <script src="http://codemirror.net/lib/codemirror.js"></script>
-    <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
     <script src="http://codemirror.net/addon/edit/closebrackets.js"></script>
 </body>
 
