@@ -6,7 +6,9 @@ $(document).ready(function() {
     });
 
     $('#createProject').click(function() {
-        setProjectName();
+        if (setProjectName() && setProjectLang()) {
+            $('#newProjectModal').modal('hide');
+        }
     });
 
     $('#newFile').click(function() {
@@ -34,24 +36,42 @@ function initEditor() {
  * New project
  */
 
-//TODO project language?
-
 let projectName;
 
 function setProjectName() {
-    let temp = $('#projectNameField').val();
+    let name = $('#projectNameField').val();
 
-    if (temp.length > 0) {
-        $('#projectNameHeader').text(temp);
-        $('#newProjectModal').modal('hide');
-    } else {
-        $('#projectNameErr').text('Invalid project name');
+    if (name.length > 0) {
+        $('#projectNameHeader').text(name);
+        $('#projectNameErr').text('');
+
+        return true;
     }
+
+    $('#projectNameErr').text('Invalid project name');
+
+    return false;
+}
+
+function setProjectLang() {
+    let lang = $('#projectLangSelect').val();
+
+    if (lang != null) {
+        editor.setOption("mode", lang);
+        $('#projectLangErr').text('');
+
+        return true;
+    }
+
+    $('#projectLangErr').text('You must specify a language for the project');
+
+    return false;
 }
 
 function resetNewProject() {
     $('#projectNameField').val('');
     $('#projectNameErr').text('');
+    $("#projectLangSelect").get(0).selectedIndex = 0;
 }
 
 /*
