@@ -13,7 +13,6 @@ body {
 
 .left {
     width: 250px;
-    height: 80%;
     float: left;
 }
 
@@ -30,7 +29,7 @@ body {
     top: 95px;
     bottom: 30px;
     position: absolute;
-    background-color: #cbd3da;
+    background-color: #c4c9ce;
 }
 
 .right {
@@ -46,6 +45,10 @@ body {
     width: 100px;
     height: 30px;
     float: left;
+    cursor: pointer;
+}
+
+.opentab {
     border-bottom: 2px solid #0f87f8;
 }
 
@@ -62,12 +65,25 @@ body {
 .filename {
     color: #4c4c4c;
     margin-left: 10px;
+}
+
+.noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.editor {
+    width: calc(100% - 250px);
+    height: 100%;
+    top: 95px;
+    bottom: 30px;
+    left: 250px;
+    position: absolute;
+    background-color: #aeb3b7;
 }
 
 .footer {
@@ -77,42 +93,6 @@ body {
     bottom: 0;
     background-color: #f8f9fa;
 }
-
-/*
-.leftPanel {
-    width: 20%;
-    height: 100%;
-    float: left;
-    resize: horizontal;
-    background-color: #FF0000;
-}
-
-.rightPanel {
-    width: auto;
-    margin-left: auto;
-    margin-top: 40px;
-}
-
-.projectName {
-    background-color: #FFFFFF;
-    height: 30px;
-    display: block;
-    text-align: center;
-}
-
-.openFiles {
-
-}
-
-.fileTree {
-    background-color: #9F9F9F;
-    height: 800px;
-}
-
-.editorContainer {
-    width: auto;
-    height: 800px;
-}*/
 
 .navbar {
     height: 30px;

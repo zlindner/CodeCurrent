@@ -1,10 +1,13 @@
 $(document).ready(function() {
-    initEditor();
+    //initEditor();
 
     $('#newProjectModal').on('show.bs.modal', function(event) {
         resetNewProject();
     });
 
+    /*
+     * Menu bar
+     */
     $('#createProject').click(function() {
         if (setProjectName() && setProjectLang()) {
             $('#newProjectModal').modal('hide');
@@ -13,6 +16,36 @@ $(document).ready(function() {
 
     $('#newFile').click(function() {
         newFile();
+    });
+
+    /*
+     * File bar
+     */
+     let close = false;
+
+     $('.closetab').click(function() {
+         if ($(this.parentNode).hasClass('opentab')) {
+             this.parentNode.parentNode.removeChild(this.parentNode);
+
+             let tabs = $('.filetab');
+
+             if (tabs.length != 0) {
+                 $(tabs[0]).addClass('opentab');
+             }
+         } else {
+             this.parentNode.parentNode.removeChild(this.parentNode);
+         }
+
+         close = true;
+     });
+
+    $('.filetab').click(function() {
+        if (close) {
+            return;
+        }
+
+        $('.opentab').removeClass('opentab');
+        $(this).addClass('opentab');
     });
 });
 
@@ -94,19 +127,14 @@ function resetNewProject() {
  * New file
  */
 
-//TODO close button for open files
 //TODO probably modal for new file -> file name, language?
 //TODO get possible file types for language selected (like idea)
 //TODO set templates for file types
 //TODO support highliting for certain file types in a certain project type (ex. javascript project w/ special highlighting for json files, makefiles, etc.)
 
-let openFiles = 0;
-
 function newFile() {
     let html = '<li class="nav-item"><a class="nav-link active" href="#">untitled</a></li>';
     $('#fileTabs').append(html);
-
-    openFiles++;
 
     if (!editorShown) {
         $(editor.getWrapperElement()).show();
