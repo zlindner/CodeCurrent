@@ -29,7 +29,7 @@ $(document).ready(function() {
      */
     let close = false;
 
-    $('.closetab').click(function() {
+    $(document).on('click', '.closetab', function() {
         if ($(this.parentNode).hasClass('opentab')) {
             this.parentNode.parentNode.removeChild(this.parentNode);
 
@@ -45,8 +45,10 @@ $(document).ready(function() {
         close = true;
     });
 
-    $('.filetab').click(function() {
+    $(document).on('click', '.filetab', function() {
         if (close) {
+            close = false;
+
             return;
         }
 
@@ -140,7 +142,7 @@ function resetNewProject() {
  * New file
  */
 
-//TODO file type 
+//TODO file type
 //TODO get possible file types for language selected (like idea)
 //TODO set templates for file types
 //TODO support highliting for certain file types in a certain project type (ex. javascript project w/ special highlighting for json files, makefiles, etc.)
@@ -148,7 +150,11 @@ function resetNewProject() {
 let filename;
 
 function createFile() {
-    //TODO stuff
+    let html = '<div class="filetab opentab"><span class="closetab noselect">&times;</span><p class="filename noselect">' + filename + '</p></div>';
+
+    $('.opentab').removeClass('opentab');
+
+    $('#filebar').append(html);
 
     $('#newFileModal').modal('hide');
 }
