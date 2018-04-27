@@ -1,43 +1,49 @@
 $(document).ready(function() {
     //initEditor();
 
-    $('#newProjectModal').on('show.bs.modal', function(event) {
-        resetNewProject();
-    });
-
     /*
      * Menu bar
      */
     $('#createProject').click(function() {
         if (setProjectName() && setProjectLang()) {
-            $('#newProjectModal').modal('hide');
+            createProject();
         }
     });
 
-    $('#newFile').click(function() {
-        newFile();
+    $('#createFile').click(function() {
+        if (setFilename()) {
+            createFile();
+        }
+    });
+
+    $('#newProjectModal').on('show.bs.modal', function(event) {
+        resetNewProject();
+    });
+
+    $('#newFileModal').on('show.bs.modal', function(event) {
+        resetNewFile();
     });
 
     /*
      * File bar
      */
-     let close = false;
+    let close = false;
 
-     $('.closetab').click(function() {
-         if ($(this.parentNode).hasClass('opentab')) {
-             this.parentNode.parentNode.removeChild(this.parentNode);
+    $('.closetab').click(function() {
+        if ($(this.parentNode).hasClass('opentab')) {
+            this.parentNode.parentNode.removeChild(this.parentNode);
 
-             let tabs = $('.filetab');
+            let tabs = $('.filetab');
 
-             if (tabs.length != 0) {
-                 $(tabs[0]).addClass('opentab');
-             }
-         } else {
-             this.parentNode.parentNode.removeChild(this.parentNode);
-         }
+            if (tabs.length != 0) {
+                $(tabs[0]).addClass('opentab');
+            }
+        } else {
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        }
 
-         close = true;
-     });
+        close = true;
+    });
 
     $('.filetab').click(function() {
         if (close) {
@@ -75,11 +81,18 @@ function initEditor() {
 let projectName;
 let projectLang;
 
+function createProject() {
+    //TODO stuff
+
+    $('#newProjectModal').modal('hide');
+}
+
 function setProjectName() {
     let name = $('#projectNameField').val();
 
     if (name.length > 0) {
-        $('#projectNameHeader').text(name);
+        projectName = name;
+
         $('#projectNameErr').text('');
 
         return true;
@@ -127,16 +140,35 @@ function resetNewProject() {
  * New file
  */
 
-//TODO probably modal for new file -> file name, language?
+//TODO file type 
 //TODO get possible file types for language selected (like idea)
 //TODO set templates for file types
 //TODO support highliting for certain file types in a certain project type (ex. javascript project w/ special highlighting for json files, makefiles, etc.)
 
-function newFile() {
-    let html = '<li class="nav-item"><a class="nav-link active" href="#">untitled</a></li>';
-    $('#fileTabs').append(html);
+let filename;
 
-    if (!editorShown) {
-        $(editor.getWrapperElement()).show();
+function createFile() {
+    //TODO stuff
+
+    $('#newFileModal').modal('hide');
+}
+
+function setFilename() {
+    let name = $('#filenameField').val();
+
+    if (name.length > 0) {
+        filename = name;
+        $('#filenameErr').text('');
+
+        return true;
     }
+
+    $('#filenameErr').text('You must specify a filename for the file');
+
+    return false;
+}
+
+function resetNewFile() {
+    $('#filenameField').val('');
+    $('#filenameErr').text('');
 }
