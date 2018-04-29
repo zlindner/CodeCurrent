@@ -64,7 +64,11 @@ body {
 
 .filename {
     color: #4c4c4c;
+    width: 65px;
     margin-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .noselect {

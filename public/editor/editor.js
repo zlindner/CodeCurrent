@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    //initEditor();
-
     /*
      * Menu bar
      */
@@ -22,6 +20,11 @@ $(document).ready(function() {
 
     $('#newFileModal').on('show.bs.modal', function(event) {
         resetNewFile();
+    });
+
+    //TODO temp
+    $('form').submit(function(e) {
+        e.preventDefault();
     });
 
     /*
