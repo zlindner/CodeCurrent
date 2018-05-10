@@ -14,11 +14,12 @@ $(document).ready(function() {
         }
     });
 
-    $('#newProjectModal').on('show.bs.modal', function(event) {
+    $('#newProjectModal').on('show.bs.modal', function(e) {
         resetNewProject();
     });
 
-    $('#newFileModal').on('show.bs.modal', function(event) {
+    //TODO fix new file button disabling when no project
+    $('#newFileModal').on('show.bs.modal', function(e) {
         resetNewFile();
     });
 
@@ -32,17 +33,22 @@ $(document).ready(function() {
      */
     let close = false;
 
+    //TODO close nearest to left tab rather than first
     $(document).on('click', '.closetab', function() {
-        if ($(this.parentNode).hasClass('opentab')) {
-            this.parentNode.parentNode.removeChild(this.parentNode);
+        let open = $(this.parentNode).hasClass('opentab');
 
+        console.log($(this.parentNode).index());
+
+        //this.parentNode.parentNode.removeChild(this.parentNode);
+
+        if (open) {
             let tabs = $('.filetab');
+
+            //console.log(tabs.indexOf(this.parentNode));
 
             if (tabs.length != 0) {
                 $(tabs[0]).addClass('opentab');
             }
-        } else {
-            this.parentNode.parentNode.removeChild(this.parentNode);
         }
 
         close = true;
@@ -57,6 +63,25 @@ $(document).ready(function() {
 
         $('.opentab').removeClass('opentab');
         $(this).addClass('opentab');
+    });
+
+    /*
+     * File tree
+     */
+
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/jstree',
+        data: {
+            project_dir: 'fdsafdasfas'
+        },
+        success: function(data) {
+            $('#projTree').jstree(data);
+        },
+        fail: function(error) {
+
+        }
     });
 });
 
@@ -87,9 +112,22 @@ let projectName;
 let projectLang;
 
 function createProject() {
-    //TODO stuff
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/mkdir',
+        data: {
+            dir: projectName
+        },
+        success: function(data) {
+            $('#newProjectModal').modal('hide');
 
-    $('#newProjectModal').modal('hide');
+            $('#newFileMenuButton').removeClass('disabled');
+        },
+        fail: function(error) {
+
+        }
+    });
 }
 
 function setProjectName() {
@@ -120,7 +158,7 @@ function setProjectLang() {
         s.async = true;
 
         s.onload = function() {
-            editor.setOption("mode", mode);
+            //editor.setOption("mode", mode);
         }
 
         document.head.appendChild(s);
