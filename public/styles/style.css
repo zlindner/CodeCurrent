@@ -23,6 +23,13 @@ body {
     border-right: 1px solid #949596;
 }
 
+.projName>p {
+    color: #4c4c4c;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .projTree {
     width: inherit;
     height: 100%;

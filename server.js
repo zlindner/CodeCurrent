@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/index/index.html');
 });
 
-app.get('/mkdir', function(req, res) {
+app.get('/createProjectDir', function(req, res) {
     let dir = req.query.dir;
 
     fs.mkdir('project_files/' + dir, function() {
@@ -23,15 +23,26 @@ app.get('/mkdir', function(req, res) {
     });
 });
 
+app.get('/createFile', function(req, res) {
+    let dir = req.query.dir;
+    let file = req.query.file;
+
+    fs.writeFile('project_files/' + dir + '/' + file, '');
+
+    res.send(true);
+});
+
 app.get('/jstree', function(req, res) {
-    getDirectories('project_files/fdsafdasfas', function(err, files) {
+    let dir = req.query.dir;
+
+    getDirectories('project_files/' + dir, function(err, files) {
         if (err) {
             console.log('Error', err);
         } else {
             let data = [{
-                id: 'fdsafdasfas',
+                id: dir,
                 parent: '#',
-                text: 'fdsafdasfas'
+                text: dir
             }];
 
             for (let file in files) {
@@ -63,8 +74,6 @@ app.get('/jstree', function(req, res) {
                     data: data
                 }
             }
-
-            console.log(JSON.stringify(core));
 
             res.send(core);
         }

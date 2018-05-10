@@ -5,6 +5,7 @@ $(document).ready(function() {
     $('#createProject').click(function() {
         if (setProjectName() && setProjectLang()) {
             createProject();
+            createProjectTree();
         }
     });
 
@@ -69,20 +70,7 @@ $(document).ready(function() {
      * File tree
      */
 
-    $.ajax({
-        type: 'get',
-        dataType: 'json',
-        url: '/jstree',
-        data: {
-            project_dir: 'fdsafdasfas'
-        },
-        success: function(data) {
-            $('#projTree').jstree(data);
-        },
-        fail: function(error) {
 
-        }
-    });
 });
 
 /*
@@ -115,7 +103,7 @@ function createProject() {
     $.ajax({
         type: 'get',
         dataType: 'json',
-        url: '/mkdir',
+        url: '/createProjectDir',
         data: {
             dir: projectName
         },
@@ -123,6 +111,8 @@ function createProject() {
             $('#newProjectModal').modal('hide');
 
             $('#newFileMenuButton').removeClass('disabled');
+
+            $('#projName').text(projectName);
         },
         fail: function(error) {
 
@@ -191,13 +181,29 @@ function resetNewProject() {
 let filename;
 
 function createFile() {
-    let html = '<div class="filetab opentab"><span class="closetab noselect">&times;</span><p class="filename noselect">' + filename + '</p></div>';
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/createFile',
+        data: {
+            dir: projectName,
+            file: filename
+        },
+        success: function(data) {
+            $('#newFileModal').modal('hide');
 
-    $('.opentab').removeClass('opentab');
+            let html = '<div class="filetab opentab"><span class="closetab noselect">&times;</span><p class="filename noselect">' + filename + '</p></div>';
 
-    $('#filebar').append(html);
+            $('.opentab').removeClass('opentab');
 
-    $('#newFileModal').modal('hide');
+            $('#filebar').append(html);
+
+            refreshProjectTree();
+        },
+        fail: function(error) {
+
+        }
+    });
 }
 
 function setFilename() {
@@ -218,4 +224,45 @@ function setFilename() {
 function resetNewFile() {
     $('#filenameField').val('');
     $('#filenameErr').text('');
+}
+
+/*
+ * Project file tree
+ */
+
+//TODO configure jstree
+
+function createProjectTree() {
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/jstree',
+        data: {
+            dir: projectName
+        },
+        success: function(data) {
+            $('#projTree').jstree(data);
+        },
+        fail: function(error) {
+
+        }
+    });
+}
+
+function refreshProjectTree() {
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: '/jstree',
+        data: {
+            dir: projectName
+        },
+        success: function(data) {
+            $('#projTree').jstree(true).settings = data;
+            $('#projTree').jstree(true).refresh();
+        },
+        fail: function(error) {
+
+        }
+    });
 }
