@@ -1,5 +1,10 @@
 $(document).ready(function() {
     /*
+     * Editor
+     */
+    initEditor();
+
+    /*
      * Menu bar
      */
     $('#createProject').click(function() {
@@ -32,45 +37,14 @@ $(document).ready(function() {
     /*
      * File bar
      */
-    let close = false;
 
-    //TODO close nearest to left tab rather than first
-    $(document).on('click', '.closetab', function() {
-        let open = $(this.parentNode).hasClass('opentab');
-
-        console.log($(this.parentNode).index());
-
-        //this.parentNode.parentNode.removeChild(this.parentNode);
-
-        if (open) {
-            let tabs = $('.filetab');
-
-            //console.log(tabs.indexOf(this.parentNode));
-
-            if (tabs.length != 0) {
-                $(tabs[0]).addClass('opentab');
-            }
-        }
-
-        close = true;
+    $(document).on('click', '.closetab', function(e) {
+        closeFile(this, e);
     });
 
     $(document).on('click', '.filetab', function() {
-        if (close) {
-            close = false;
-
-            return;
-        }
-
-        $('.opentab').removeClass('opentab');
-        $(this).addClass('opentab');
+        openFile(this);
     });
-
-    /*
-     * File tree
-     */
-
-
 });
 
 /*
@@ -87,9 +61,60 @@ function initEditor() {
         autoCloseBrackets: true,
     });
 
-    editor.setSize(null, 800);
+    editor.setSize(null, 900);
 
-    $(editor.getWrapperElement()).hide();
+    hideEditor();
+}
+
+function hideEditor() {
+    if (editorShown) {
+        $(editor.getWrapperElement()).hide();
+        editorShown = false;
+    }
+}
+
+function showEditor() {
+    if (!editorShown) {
+        $(editor.getWrapperElement()).show();
+        editorShown = true;
+    }
+}
+
+/*
+ * Menu bar
+ */
+
+function closeFile(x, e) {
+    e.stopPropagation(); // prevent openFile() being called
+
+    let wasOpen = $(x.parentNode).hasClass('opentab');
+    let tabs = $('.filetab').toArray();
+    let index = tabs.indexOf(x.parentNode);
+
+    x.parentNode.parentNode.removeChild(x.parentNode); // remove tab
+
+    if (wasOpen) {
+        tabs = $('.filetab').toArray(); // need to update the tabs as a child was removed
+
+        if (tabs.length != 0) {
+            if (index == 0) {
+                $(tabs[0]).addClass('opentab');
+            } else {
+                $(tabs[index - 1]).addClass('opentab');
+            }
+        }
+    }
+
+    if (tabs.length == 0) {
+        hideEditor();
+    }
+}
+
+function openFile(tab) {
+    $('.opentab').removeClass('opentab');
+    $(tab).addClass('opentab');
+
+    //TODO load file contents into editor
 }
 
 /*
@@ -193,12 +218,12 @@ function createFile() {
             $('#newFileModal').modal('hide');
 
             let html = '<div class="filetab opentab"><span class="closetab noselect">&times;</span><p class="filename noselect">' + filename + '</p></div>';
-
             $('.opentab').removeClass('opentab');
-
             $('#filebar').append(html);
 
             refreshProjectTree();
+
+            showEditor();
         },
         fail: function(error) {
 
