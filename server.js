@@ -3,10 +3,12 @@
 let express = require('express');
 let app = express();
 let server = require('http').createServer(app);
-let io = require('socket.io').listen(server);
 let helmet = require('helmet');
 let fs = require('fs');
 let glob = require('glob');
+let sharedb = require('sharedb');
+let ws = require('ws');
+let jsonStream = require('websocket-json-stream');
 
 app.use(express.static('public'));
 app.use(helmet());

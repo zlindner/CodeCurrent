@@ -52,7 +52,7 @@ $(document).ready(function() {
  */
 
 let editor;
-let editorShown = false;
+let editorShown = true; // needs to be true for initEditor() -> hideEditor()
 
 function initEditor() {
     editor = CodeMirror.fromTextArea($('#editor')[0], {
